@@ -1,16 +1,18 @@
-import './App.css';
+import './index.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import SingUP from './components/SingUp';
 
 export default function App() {
   return (
       <>
-          <AuthProvider>
-              <GlobalStyle />
+          
+              
               <BrowserRouter>
                   <Routes>
-                      
+                      <Route path='/singup' element={<SingUP/>} />
                   </Routes>
               </BrowserRouter>
-          </AuthProvider>
+          
       </>
 
   )
