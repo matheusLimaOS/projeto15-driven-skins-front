@@ -1,15 +1,45 @@
-import { Link } from "react-router-dom"
+import axios from "axios"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 export default function SingUP () {
+
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+
+    const navigation = useNavigate()
+
+    async function sendCadastro () {
+        try {
+            const register = {
+                name: name,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            }
+
+            await axios.post('http://localhost:5000/register', register)
+
+            navigation('/')
+
+        } catch (error) {
+            alert(error.response.data)
+        }
+    }
+
+
     return(
         <Global>
             <h1>DrivenSkins</h1>
             <div className="box">
-                <input type="text" placeholder="Nome"/>
-                <input type="text" placeholder="Email"/>
-                <input type="password" placeholder="Senha"/>
-                <input type="password" placeholder="Confirme a senha"/>
+                <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Nome"/>
+                <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
+                <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Senha"/>
+                <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirme a senha"/>
+                <button onClick={()=> sendCadastro()}>Cadastrar</button>
                 <Link to="/">
                     <p>Já tem uma conta? Faça login.</p>
                 </Link>
@@ -35,6 +65,19 @@ const Global = styled.div`
         text-decoration: none;
     }
 
+    .box button{
+        border: none;
+        width: 200px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: #1f1f1f;
+        color: #17ff23;
+        font: 400 20px "Nerko One";
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+ 
     p{
         font: 400 20px "Nerko One";
         color: #17ff23;
