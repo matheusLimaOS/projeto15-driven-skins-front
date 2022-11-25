@@ -1,6 +1,6 @@
 import './index.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import SingUP from './components/SingUp';
+import SingUP from './components/SingUp.js';
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
               
               <BrowserRouter>
                   <Routes>
-                      <Route path='/singup' element={<SingUP/>} />
+                      <Route path="/singup" element={<SingUP/>} />
                   </Routes>
               </BrowserRouter>
           
