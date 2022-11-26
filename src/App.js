@@ -1,6 +1,7 @@
 import './index.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import SingUP from './components/SingUp.js';
+import SignUp from './components/SignUp.js';
+import Login from './components/Login';
 
 export default function App() {
   return (
@@ -8,9 +9,10 @@ export default function App() {
           
               
               <BrowserRouter>
-                  <Routes>
-                      <Route path="/singup" element={<SingUP/>} />
-                  </Routes>
+                <Routes>
+                    <Route path="/" element={<Login/>} />
+                    <Route path="/signup" element={<SignUp/>} />
+                </Routes>
               </BrowserRouter>
           
       </>
