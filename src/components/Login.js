@@ -1,17 +1,20 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import React from "react"
+import { AuthContext } from "../providers/Auth"
+import axios from "axios"
 
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-
+    let {setUser} = React.useContext(AuthContext);
+    let navigate = useNavigate();
 
     return(
         <Container>
             <h1>DrivenSkins</h1>
-            <form onSubmit={(e)=>{handleSubmit(e,email,password)}} className="box">
+            <form onSubmit={(e)=>{handleSubmit(e,email,password,setUser,navigate)}} className="box">
                 <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email"/>
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Senha"/>
                 <button type="submit">Login</button>
@@ -24,9 +27,19 @@ export default function Login() {
     )
 }
 
-async function handleSubmit(e,email,password){
+async function handleSubmit(e,email,password,setUser,navigate){
     e.preventDefault();
 
+    try{
+        let post = await axios.post(`${process.env.REACT_APP_BASE_URL}/login`,{email,password});
+        setUser(post.data);
+        navigate("/home");
+    }
+    catch(e){
+        console.log(e.response.data)
+        window.alert("Email ou senha incorretos");
+    }
+    
     console.log(email,password)
 }
 

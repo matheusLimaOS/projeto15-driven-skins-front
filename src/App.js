@@ -1,21 +1,21 @@
 import './index.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { AuthProvider } from "./providers/Auth";
 import SignUp from './components/SignUp.js';
 import Login from './components/Login';
 
 export default function App() {
   return (
-      <>
-          
-              
-              <BrowserRouter>
+    <>
+        <AuthProvider>
+            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login/>} />
                     <Route path="/signup" element={<SignUp/>} />
                 </Routes>
-              </BrowserRouter>
-          
-      </>
+            </BrowserRouter>
+        </AuthProvider>
+    </>
 
   )
 }
