@@ -4,23 +4,32 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../providers/Auth";
+import { useNavigate } from "react-router-dom";
+
 
 export default function OpeningBox() {
     let [time,setTime] = useState(30);
     let [infinite,setInfinite] = useState(true);
     let [timeFut,setTimeFut] = useState("");
     let [mock,setMock] = useState([]);
+    let {user} = React.useContext(AuthContext);
+    let navigate = useNavigate();
 
     useEffect(()=>{
         async function getProducts(){
             let get = await axios.get(`${process.env.REACT_APP_BASE_URL}/listproducts`);
-            console.log(get.data)
             setMock(get.data.sort(()=>{
                 return Math.random() - 0.5;
             }));
         }
-
-        getProducts();    
+        if(user.token!==""){
+            getProducts();
+        }
+        else{
+            navigate("/");
+        }
+        // eslint-disable-next-line
     },[])
 
     return(
