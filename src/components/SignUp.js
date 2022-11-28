@@ -87,7 +87,7 @@ const Global = styled.div`
     h1{
         color: #17ff23;
         font: 700 70px "Raleway";
-        margin-top: 40px;
+        margin-top: 100px;
         margin-bottom: 30px;
 
     }
@@ -96,7 +96,7 @@ const Global = styled.div`
         display: flex;
         flex-direction: column;
         background-color: black;
-        width: 500px;
+        width: 380px;
         height: 400px;
         align-items: center;
         justify-content: center;
