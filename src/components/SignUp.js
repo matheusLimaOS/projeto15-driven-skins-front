@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function SingUP () {
+export default function SignUp() {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
